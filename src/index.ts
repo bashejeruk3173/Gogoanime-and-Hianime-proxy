@@ -9,9 +9,24 @@ dotenv.config();
 const app = express();
 const PORT = 4040;
 
+// Allow only gogoanime.me.uk
+const allowedOrigin = 'https://gogoanime.me.uk';
+
+app.use(cors({
+    origin: (origin, callback) => {
+        // Allow requests with no origin (like mobile apps, curl, etc.) or from the allowed domain
+        if (!origin || origin === allowedOrigin) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors({ origin: "*" }));
 app.use(cacheRoutes());
 
 app.get("/", (_, res) => {
