@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cors({ origin: "*" }));
 app.use(cacheRoutes());
 
-app.get("/", (_, res) => { res.send("hianime streaming m3u8 proxy") });
+app.get("/", (_, res) => { res.send("NOOOOOOOOOOOOOOOOOOOOOO!") });
 app.use('/', router);
 
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
